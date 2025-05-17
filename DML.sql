@@ -25,6 +25,10 @@ INSERT INTO dim_size (size_name)
 SELECT DISTINCT product_size FROM raw_data WHERE product_size IS NOT NULL AND product_size != ''
 ON CONFLICT (size_name) DO NOTHING;
 
+INSERT INTO dim_state (state_name)
+SELECT DISTINCT store_state FROM raw_data WHERE store_state IS NOT NULL AND store_state != ''
+ON CONFLICT (state_name) DO NOTHING;
+
 INSERT INTO dim_country (country_name)
 SELECT DISTINCT country FROM (
     SELECT customer_country AS country FROM raw_data WHERE customer_country IS NOT NULL AND customer_country != ''
